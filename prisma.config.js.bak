@@ -1,0 +1,15 @@
+// Note: Prisma's JS config file parsing is strict and varies by Prisma version.
+// Keep this file minimal and strictly JS.
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+module.exports = {
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
+};
+
+
