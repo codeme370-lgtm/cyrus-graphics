@@ -86,8 +86,8 @@ const Drawer = ({ open, onClose, isSidebarMode = false, isSidebarOpen = true, on
       links: [
         { name: 'Products', href: '/admin/products', icon: Box },
         { name: 'Categories', href: '/admin/categories', icon: Layers },
+        { name: 'Services', href: '/admin/services', icon: Sparkles },
         { name: 'Brands', href: '/admin/brands', icon: Tag },
-        { name: 'Attributes', href: '/admin/attributes', icon: SlidersHorizontal },
         { name: 'Reviews', href: '/admin/reviews', icon: Star },
       ]
     },
@@ -106,7 +106,6 @@ const Drawer = ({ open, onClose, isSidebarMode = false, isSidebarOpen = true, on
         { name: 'Customers', href: '/admin/customers', icon: Users },
         { name: 'Quotes', href: '/admin/quotes', icon: Sparkles },
         { name: 'Payments', href: '/admin/payments', icon: CreditCard },
-        { name: 'Returns & Refunds', href: '/admin/returns', icon: RotateCcw },
       ]
     },
     {
@@ -121,13 +120,17 @@ const Drawer = ({ open, onClose, isSidebarMode = false, isSidebarOpen = true, on
       ]
     },
     {
+      title: 'REPORTS & ANALYTICS',
+      links: [
+        { name: 'Reports', href: '/admin/reports', icon: BarChart3 },
+      ]
+    },
+    {
       title: 'SYSTEM & SETTINGS',
       links: [
         { name: 'Stores', href: '/admin/stores', icon: Store },
         { name: 'Staff', href: '/admin/staff', icon: User },
-        { name: 'Payment Methods', href: '/admin/payment-methods', icon: CreditCard },
-        { name: 'Shipping Methods', href: '/admin/shipping-methods', icon: Truck },
-        { name: 'Taxes', href: '/admin/taxes', icon: Percent },
+        { name: 'Approvals', href: '/admin/approve', icon: ShieldCheck },
         { name: 'Settings', href: '/admin/settings', icon: Settings },
       ]
     },

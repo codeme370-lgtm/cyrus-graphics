@@ -56,7 +56,6 @@ const { user } = useAuth()
                 { name: 'Categories', href: '/admin/categories', icon: Layers },
                 { name: 'Services', href: '/admin/services', icon: Briefcase },
                 { name: 'Brands', href: '/admin/brands', icon: Tag },
-                { name: 'Attributes', href: '/admin/attributes', icon: SlidersHorizontal },
                 { name: 'Reviews', href: '/admin/reviews', icon: Star },
             ]
         },
@@ -75,7 +74,6 @@ const { user } = useAuth()
                 { name: 'Customers', href: '/admin/customers', icon: Users },
                 { name: 'Quotes', href: '/admin/quotes', icon: MessageSquare },
                 { name: 'Payments', href: '/admin/payments', icon: CreditCard },
-                { name: 'Returns & Refunds', href: '/admin/returns', icon: RefreshCcw },
             ]
         },
         {
@@ -100,9 +98,7 @@ const { user } = useAuth()
             links: [
                 { name: 'Stores', href: '/admin/stores', icon: Store },
                 { name: 'Staff', href: '/admin/staff', icon: UserCheck },
-                { name: 'Payment Methods', href: '/admin/payment-methods', icon: CreditCard },
-                { name: 'Shipping Methods', href: '/admin/shipping-methods', icon: Truck },
-                { name: 'Taxes', href: '/admin/taxes', icon: Percent },
+                { name: 'Approvals', href: '/admin/approve', icon: ShieldCheck },
                 { name: 'Settings', href: '/admin/settings', icon: Settings },
             ]
         },

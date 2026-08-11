@@ -46,9 +46,17 @@ const AdminDrawer = ({ open, onClose, userImage, userName }) => {
             links: [
                 { name: 'Products', href: '/admin/products', icon: Box },
                 { name: 'Categories', href: '/admin/categories', icon: Layers },
+                { name: 'Services', href: '/admin/services', icon: ShieldCheck },
                 { name: 'Brands', href: '/admin/brands', icon: Tag },
-                { name: 'Attributes', href: '/admin/attributes', icon: SlidersHorizontal },
                 { name: 'Reviews', href: '/admin/reviews', icon: Star },
+            ]
+        },
+        {
+            title: 'PRODUCTION & OPERATIONS',
+            links: [
+                { name: 'Printing Jobs', href: '/admin/printing-jobs', icon: Printer },
+                { name: 'Deliveries', href: '/admin/deliveries', icon: Truck },
+                { name: 'Pricing', href: '/admin/pricing', icon: Percent },
             ]
         },
         {
@@ -58,15 +66,6 @@ const AdminDrawer = ({ open, onClose, userImage, userName }) => {
                 { name: 'Customers', href: '/admin/customers', icon: Users },
                 { name: 'Quotes', href: '/admin/quotes', icon: MessageSquare },
                 { name: 'Payments', href: '/admin/payments', icon: CreditCard },
-                { name: 'Returns & Refunds', href: '/admin/returns', icon: RefreshCcw },
-            ]
-        },
-        {
-            title: 'PRODUCTION & OPERATIONS',
-            links: [
-                { name: 'Printing Jobs', href: '/admin/printing-jobs', icon: Printer },
-                { name: 'Deliveries', href: '/admin/deliveries', icon: Truck },
-                { name: 'Pricing', href: '/admin/pricing', icon: Percent },
             ]
         },
         {
@@ -81,13 +80,17 @@ const AdminDrawer = ({ open, onClose, userImage, userName }) => {
             ]
         },
         {
+            title: 'REPORTS & ANALYTICS',
+            links: [
+                { name: 'Reports', href: '/admin/reports', icon: Activity },
+            ]
+        },
+        {
             title: 'SYSTEM & SETTINGS',
             links: [
                 { name: 'Stores', href: '/admin/stores', icon: Store },
                 { name: 'Staff', href: '/admin/staff', icon: UserCheck },
-                { name: 'Payment Methods', href: '/admin/payment-methods', icon: CreditCard },
-                { name: 'Shipping Methods', href: '/admin/shipping-methods', icon: Truck },
-                { name: 'Taxes', href: '/admin/taxes', icon: Percent },
+                { name: 'Approvals', href: '/admin/approve', icon: Key },
                 { name: 'Settings', href: '/admin/settings', icon: Settings },
             ]
         },
