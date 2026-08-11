@@ -39,6 +39,8 @@ import {
   Edit3,
   Store,
   Percent,
+  BarChart3,
+  ShieldCheck,
 } from 'lucide-react'
 import logo from '@/app/logo.png'
 
