@@ -47,7 +47,6 @@ const AdminDrawer = ({ open, onClose, userImage, userName }) => {
                 { name: 'Products', href: '/admin/products', icon: Box },
                 { name: 'Categories', href: '/admin/categories', icon: Layers },
                 { name: 'Services', href: '/admin/services', icon: ShieldCheck },
-                { name: 'Brands', href: '/admin/brands', icon: Tag },
                 { name: 'Reviews', href: '/admin/reviews', icon: Star },
             ]
         },
@@ -73,8 +72,6 @@ const AdminDrawer = ({ open, onClose, userImage, userName }) => {
             links: [
                 { name: 'Coupons', href: '/admin/coupons', icon: Ticket },
                 { name: 'Banners', href: '/admin/banners', icon: ImageIcon },
-                { name: 'Newsletter', href: '/admin/newsletter', icon: Mail },
-                { name: 'Pages', href: '/admin/pages', icon: FileText },
                 { name: 'Blog Posts', href: '/admin/blog-posts', icon: Edit3 },
                 { name: 'Portfolio', href: '/admin/portfolio', icon: ImageIcon },
             ]

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Search, Plus, Eye, Edit2, Trash2, MoreVertical } from 'lucide-react'
+import { Search, Plus, Eye, Edit2, Trash2, MoreVertical, X, PackagePlus, FolderPlus, Tags, BriefcaseBusiness } from 'lucide-react'
 
 const sampleProducts = [
   {
@@ -79,6 +79,22 @@ const statusColors = {
 export default function ProductsClient() {
   const [searchTerm, setSearchTerm] = useState('')
   const [filterStatus, setFilterStatus] = useState('All Status')
+  const [quickAddOpen, setQuickAddOpen] = useState(false)
+  const [quickAddType, setQuickAddType] = useState('product')
+  const [quickAddForm, setQuickAddForm] = useState({
+    name: '',
+    category: '',
+    price: '',
+    stock: '',
+    description: '',
+  })
+
+  const quickAddOptions = [
+    { key: 'product', label: 'Add Product', icon: PackagePlus },
+    { key: 'category', label: 'Add Category', icon: FolderPlus },
+    { key: 'brand', label: 'Add Brand', icon: Tags },
+    { key: 'service', label: 'Add Service', icon: BriefcaseBusiness },
+  ]
 
   const filteredProducts = useMemo(() => {
     return sampleProducts.filter(product => {
@@ -100,6 +116,154 @@ export default function ProductsClient() {
     return { total, inStock, lowStock, outOfStock }
   }, [])
 
+  const handleQuickAddSubmit = (event) => {
+    event.preventDefault()
+    setQuickAddOpen(false)
+    setQuickAddForm({ name: '', category: '', price: '', stock: '', description: '' })
+  }
+
+  const renderQuickAddForm = () => {
+    if (quickAddType === 'category') {
+      return (
+        <div className="space-y-4">
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Category Name</span>
+            <input
+              value={quickAddForm.name}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, name: event.target.value }))}
+              placeholder="Business Cards"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Description</span>
+            <textarea
+              value={quickAddForm.description}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, description: event.target.value }))}
+              rows={4}
+              placeholder="Describe this product category"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+        </div>
+      )
+    }
+
+    if (quickAddType === 'brand') {
+      return (
+        <div className="space-y-4">
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Brand Name</span>
+            <input
+              value={quickAddForm.name}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, name: event.target.value }))}
+              placeholder="Cyrus Graphics"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Notes</span>
+            <textarea
+              value={quickAddForm.description}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, description: event.target.value }))}
+              rows={4}
+              placeholder="Add brand notes or packaging detail"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+        </div>
+      )
+    }
+
+    if (quickAddType === 'service') {
+      return (
+        <div className="space-y-4">
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Service Name</span>
+            <input
+              value={quickAddForm.name}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, name: event.target.value }))}
+              placeholder="Brand Identity Kit"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Service Price</span>
+            <input
+              value={quickAddForm.price}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, price: event.target.value }))}
+              placeholder="GH₵ 1500"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Description</span>
+            <textarea
+              value={quickAddForm.description}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, description: event.target.value }))}
+              rows={4}
+              placeholder="Describe the service package"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+        </div>
+      )
+    }
+
+    return (
+      <div className="space-y-4">
+        <label className="block text-sm text-slate-700">
+          <span className="mb-2 block font-medium">Product Name</span>
+          <input
+            value={quickAddForm.name}
+            onChange={(event) => setQuickAddForm((prev) => ({ ...prev, name: event.target.value }))}
+            placeholder="Business Card Package"
+            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+          />
+        </label>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Category</span>
+            <input
+              value={quickAddForm.category}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, category: event.target.value }))}
+              placeholder="Business Cards"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+          <label className="block text-sm text-slate-700">
+            <span className="mb-2 block font-medium">Price</span>
+            <input
+              value={quickAddForm.price}
+              onChange={(event) => setQuickAddForm((prev) => ({ ...prev, price: event.target.value }))}
+              placeholder="GH₵ 150"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+          </label>
+        </div>
+        <label className="block text-sm text-slate-700">
+          <span className="mb-2 block font-medium">Stock</span>
+          <input
+            value={quickAddForm.stock}
+            onChange={(event) => setQuickAddForm((prev) => ({ ...prev, stock: event.target.value }))}
+            placeholder="120"
+            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+          />
+        </label>
+        <label className="block text-sm text-slate-700">
+          <span className="mb-2 block font-medium">Description</span>
+          <textarea
+            value={quickAddForm.description}
+            onChange={(event) => setQuickAddForm((prev) => ({ ...prev, description: event.target.value }))}
+            rows={4}
+            placeholder="Describe the product"
+            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+          />
+        </label>
+      </div>
+    )
+  }
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8">
@@ -110,11 +274,79 @@ export default function ProductsClient() {
               Products Management
             </h1>
           </div>
-          <button className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition">
+          <button
+            type="button"
+            onClick={() => setQuickAddOpen((prev) => !prev)}
+            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition"
+          >
             <Plus className="w-5 h-5" />
             <span className="hidden sm:inline">Add Product</span>
           </button>
         </div>
+
+        {quickAddOpen && (
+          <>
+            <div
+              className="fixed inset-0 z-40 bg-slate-950/30 backdrop-blur-sm"
+              onClick={() => setQuickAddOpen(false)}
+            />
+            <aside className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col border-l border-slate-200 bg-white shadow-2xl">
+              <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500">Quick Add</p>
+                  <h2 className="mt-2 text-xl font-bold text-slate-900">Create new item</h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setQuickAddOpen(false)}
+                  className="rounded-full p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                  aria-label="Close quick add panel"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="border-b border-slate-200 px-5 py-4">
+                <div className="grid grid-cols-2 gap-2">
+                  {quickAddOptions.map(({ key, label, icon: Icon }) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => setQuickAddType(key)}
+                      className={`flex items-center gap-2 rounded-xl px-3 py-2 text-left text-sm font-medium transition ${
+                        quickAddType === key ? 'bg-amber-100 text-amber-800' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <form onSubmit={handleQuickAddSubmit} className="flex flex-1 flex-col gap-5 overflow-y-auto p-5">
+                {renderQuickAddForm()}
+
+                <div className="mt-auto flex gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setQuickAddOpen(false)}
+                    className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 rounded-2xl bg-purple-600 px-4 py-3 text-sm font-semibold text-white hover:bg-purple-700"
+                  >
+                    Save item
+                  </button>
+                </div>
+              </form>
+            </aside>
+          </>
+        )}
+
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-8">

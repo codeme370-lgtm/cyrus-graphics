@@ -9,7 +9,7 @@ import RevenueChart from "@/components/admin/RevenueChart"
 import OrdersDonutChart from "@/components/admin/OrdersDonutChart"
 
 export default function AdminClient(){
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '₦'
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'GH₵'
 
     const [loading, setLoading] = useState(true)
     const [dashboardData, setDashboardData] = useState({
