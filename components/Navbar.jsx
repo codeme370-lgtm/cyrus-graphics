@@ -129,14 +129,16 @@ const Navbar = () => {
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
                                     All Categories
                                 </button>
-                                <nav className="hidden md:flex items-center gap-6 ml-4 text-slate-300">
+                                <nav className="hidden md:flex items-center gap-5 ml-4 text-slate-300">
                                     <Link href="/" className={`${pathname === '/' ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Home</Link>
                                     <Link href="/products" className={`${pathname.startsWith('/products') || pathname.startsWith('/product/') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Products</Link>
                                     <Link href="/brands" className={`${pathname.startsWith('/brands') || pathname.startsWith('/brand/') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Brands</Link>
-                                    <Link href="/deals" className={`${pathname.startsWith('/deals') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Deals</Link>
                                     <Link href="/services" className={`${pathname.startsWith('/services') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Services</Link>
                                     <Link href="/portfolio" className={`${pathname.startsWith('/portfolio') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Portfolio</Link>
+                                    <Link href="/pricing" className={`${pathname.startsWith('/pricing') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Pricing</Link>
                                     <Link href="/blog" className={`${pathname.startsWith('/blog') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Blog</Link>
+                                    <Link href="/testimonials" className={`${pathname.startsWith('/testimonials') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Reviews</Link>
+                                    <Link href="/faq" className={`${pathname.startsWith('/faq') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>FAQ</Link>
                                     <Link href="/about" className={`${pathname.startsWith('/about') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>About Us</Link>
                                     <Link href="/contact" className={`${pathname.startsWith('/contact') ? 'text-white font-medium border-b-2 border-violet-500 pb-1' : 'hover:text-white'}`}>Contact Us</Link>
                                 </nav>

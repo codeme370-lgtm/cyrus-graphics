@@ -29,6 +29,8 @@ import {
     Settings,
     Activity,
     ServerCog,
+    MessageSquare,
+    Printer,
 } from 'lucide-react'
 
 const AdminDrawer = ({ open, onClose, userImage, userName }) => {
@@ -54,7 +56,17 @@ const AdminDrawer = ({ open, onClose, userImage, userName }) => {
             links: [
                 { name: 'Orders', href: '/admin/orders', icon: ShoppingBag },
                 { name: 'Customers', href: '/admin/customers', icon: Users },
+                { name: 'Quotes', href: '/admin/quotes', icon: MessageSquare },
+                { name: 'Payments', href: '/admin/payments', icon: CreditCard },
                 { name: 'Returns & Refunds', href: '/admin/returns', icon: RefreshCcw },
+            ]
+        },
+        {
+            title: 'PRODUCTION & OPERATIONS',
+            links: [
+                { name: 'Printing Jobs', href: '/admin/printing-jobs', icon: Printer },
+                { name: 'Deliveries', href: '/admin/deliveries', icon: Truck },
+                { name: 'Pricing', href: '/admin/pricing', icon: Percent },
             ]
         },
         {
@@ -65,19 +77,18 @@ const AdminDrawer = ({ open, onClose, userImage, userName }) => {
                 { name: 'Newsletter', href: '/admin/newsletter', icon: Mail },
                 { name: 'Pages', href: '/admin/pages', icon: FileText },
                 { name: 'Blog Posts', href: '/admin/blog-posts', icon: Edit3 },
+                { name: 'Portfolio', href: '/admin/portfolio', icon: ImageIcon },
             ]
         },
         {
             title: 'SYSTEM & SETTINGS',
             links: [
-                { name: 'Users & Roles', href: '/admin/users', icon: UserCheck },
-                { name: 'Permissions', href: '/admin/permissions', icon: Key },
+                { name: 'Stores', href: '/admin/stores', icon: Store },
+                { name: 'Staff', href: '/admin/staff', icon: UserCheck },
                 { name: 'Payment Methods', href: '/admin/payment-methods', icon: CreditCard },
                 { name: 'Shipping Methods', href: '/admin/shipping-methods', icon: Truck },
                 { name: 'Taxes', href: '/admin/taxes', icon: Percent },
                 { name: 'Settings', href: '/admin/settings', icon: Settings },
-                { name: 'Activity Logs', href: '/admin/activity-logs', icon: Activity },
-                { name: 'System Status', href: '/admin/system-status', icon: ServerCog },
             ]
         },
     ]

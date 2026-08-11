@@ -1,174 +1,129 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
 import Link from 'next/link'
-import { ArrowRight, BadgeCheck, Sparkles, Search, ChevronDown, ChevronLeft, ChevronRight, Filter } from 'lucide-react'
-import SideDrawer from '../../../components/SideDrawer'
+import { ArrowRight, Check, Gift, Palette, Search, Sparkles, Tag, TrendingUp } from 'lucide-react'
 
-const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'GHS'
+const brandCards = [
+  {
+    name: 'Brand Identity',
+    title: 'Identity Kits',
+    description: 'From logos to full brand systems for growing businesses.',
+    image:
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
+    accent: 'from-amber-500/80 via-orange-500/70 to-yellow-500/80',
+  },
+  {
+    name: 'Business Cards',
+    title: 'Print Essentials',
+    description: 'Premium cards, stationery and branded collateral for teams.',
+    image:
+      'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
+    accent: 'from-violet-500/80 via-purple-500/70 to-fuchsia-600/80',
+  },
+  {
+    name: 'Packaging',
+    title: 'Packaging Design',
+    description: 'Shelf-ready packaging and labels that elevate your product story.',
+    image:
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80',
+    accent: 'from-blue-500/80 via-cyan-500/70 to-sky-600/80',
+  },
+  {
+    name: 'Signage',
+    title: 'Point of Sale',
+    description: 'Wayfinding, banners and signage designed to grab attention.',
+    image:
+      'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=900&q=80',
+    accent: 'from-emerald-500/80 via-teal-500/70 to-cyan-600/80',
+  },
+]
+
+const featurePills = ['Branding', 'Packaging', 'Print', 'Digital Design', 'Corporate Identity', 'Event Materials']
 
 export default function BrandsContent() {
-  const products = useSelector((state) => state.product.list || [])
-  const [filtersOpen, setFiltersOpen] = useState(false)
-
-  const brandGroups = useMemo(() => {
-    return products.reduce((acc, product) => {
-      if (!product.brand) return acc
-      if (!acc[product.brand]) acc[product.brand] = []
-      acc[product.brand].push(product)
-      return acc
-    }, {})
-  }, [products])
-
-  const brandEntries = Object.entries(brandGroups).sort((a, b) => b[1].length - a[1].length)
-
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-7xl px-6 py-8">
-        <div className="rounded-[32px] border border-slate-800 bg-slate-900/90 p-8 shadow-[0_40px_120px_-40px_rgba(15,23,42,0.9)]">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Home / Brands</p>
-              <h1 className="mt-3 text-4xl font-semibold text-white">Top Brands</h1>
-              <p className="mt-4 max-w-2xl text-slate-400">Shop products from the world's most trusted tech brands.</p>
+    <main className="min-h-screen bg-[#f3f3f1] text-slate-900">
+      <section className="relative overflow-hidden bg-[#0d0d0f] text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.2),transparent_25%),radial-gradient(circle_at_left,rgba(168,85,247,0.18),transparent_30%)]" />
+        <div className="relative mx-auto max-w-[1400px] px-6 py-16 sm:py-20 lg:py-24">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-400">Home / Brands</p>
+            <h1 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">Our Creative Brands</h1>
+            <p className="mt-5 max-w-xl text-base text-slate-300 sm:text-lg">
+              We help businesses express their identity through design-led solutions that look premium and work beautifully across print and digital touchpoints.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {featurePills.map((pill) => (
+                <span key={pill} className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-slate-200">
+                  {pill}
+                </span>
+              ))}
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-slate-950/80 px-4 py-3 text-sm text-slate-300">
-              <Sparkles size={18} className="text-violet-300" /> Top brands
-            </div>
-          </div>
-
-          <div className="mt-8 grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
-            {/* Left sidebar for filters (desktop) */}
-            <aside className="hidden lg:block">
-              <div className="rounded-[16px] border border-slate-800 bg-slate-950/80 p-4">
-                <div className="mb-4">
-                  <label className="relative block">
-                    <span className="absolute inset-y-0 left-3 flex items-center text-slate-500"><Search size={16} /></span>
-                    <input placeholder="Search brands..." className="w-full rounded-lg border border-slate-800 bg-slate-900/80 py-3 pl-10 pr-4 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-violet-500/20" />
-                  </label>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Category</p>
-                    <div className="mt-3 space-y-2">
-                      <button className="w-full text-left rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-300">All Categories <span className="float-right text-slate-500">85</span></button>
-                      {['Laptops','Components','Peripherals','Gaming','Audio','Accessories'].map((c) => (
-                        <button key={c} className="w-full text-left rounded-3xl border border-slate-800 bg-slate-900/80 px-4 py-3 text-sm text-slate-300">{c} <span className="float-right text-slate-500">12</span></button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Popular Brands</p>
-                    <div className="mt-3 grid gap-2">
-                      {brandEntries.slice(0,6).map(([brand, items]) => (
-                        <label key={brand} className="flex items-center gap-3 rounded-3xl border border-slate-800 bg-slate-900/80 px-4 py-3 text-sm text-slate-300">
-                          <input type="checkbox" className="h-4 w-4 accent-violet-500" />
-                          <span className="flex-1">{brand}</span>
-                          <span className="text-slate-500">{items.length}</span>
-                        </label>
-                      ))}
-                    </div>
-                    <button className="mt-2 text-sm text-violet-300">View More</button>
-                  </div>
-
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Sort By</p>
-                    <div className="mt-3 space-y-2">
-                      {['Popular','Name A - Z','Name Z - A','Newest'].map((s) => (
-                        <label key={s} className="flex items-center gap-3 rounded-3xl border border-slate-800 bg-slate-900/80 px-4 py-3 text-sm text-slate-300">
-                          <input name="sort" type="radio" className="h-4 w-4 accent-violet-500" />
-                          {s}
-                        </label>
-                      ))}
-                    </div>
-                    <button className="mt-3 w-full rounded-3xl bg-slate-800/60 px-4 py-3 text-sm text-slate-300">Clear All</button>
-                  </div>
-                </div>
-              </div>
-            </aside>
-
-            {/* Main grid */}
-            <section>
-              <div className="flex items-center justify-between mb-4">
-                <p className="text-sm text-slate-400">Showing 1-24 of {brandEntries.length} brands</p>
-                <div className="flex items-center gap-2">
-                  <button onClick={() => setFiltersOpen(true)} className="inline-flex items-center gap-2 rounded-3xl bg-violet-500 px-4 py-2 text-sm font-semibold text-white lg:hidden">
-                    <Filter size={16} /> Filter
-                  </button>
-                  <select className="rounded-3xl border border-slate-800 bg-slate-900/80 px-4 py-2 text-sm text-slate-300">
-                    <option>Sort by: Popular</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {brandEntries.map(([brand, items]) => (
-                  <div key={brand} className="rounded-[20px] border border-slate-800 bg-slate-950/80 p-6 text-center">
-                    <div className="h-28 flex items-center justify-center mb-4">
-                      <div className="h-16 w-32 bg-slate-900/60 rounded-md flex items-center justify-center text-white font-semibold">{brand}</div>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white">{brand}</h3>
-                    <p className="mt-2 text-sm text-slate-400">{items.length} Products</p>
-                    <div className="mt-4 flex items-center justify-center gap-2 text-amber-400">
-                      {Array.from({ length: 5 }).map((_, i) => <svg key={i} className="h-4 w-4" />)}
-                    </div>
-                    <Link href="/shop" className="mt-4 inline-flex items-center gap-2 rounded-full bg-violet-500 px-4 py-2 text-sm font-semibold text-white">View Products <ArrowRight size={14} /></Link>
-                  </div>
-                ))}
-              </div>
-
-              {/* Pagination */}
-              <div className="mt-8 flex items-center justify-center gap-3">
-                <button className="rounded-full border border-slate-800 bg-slate-900/80 p-3"><ChevronLeft /></button>
-                <div className="inline-flex items-center gap-2">
-                  <button className="w-8 h-8 rounded-full bg-violet-600 text-white">1</button>
-                  <button className="w-8 h-8 rounded-full border border-slate-800 text-slate-300">2</button>
-                  <button className="w-8 h-8 rounded-full border border-slate-800 text-slate-300">3</button>
-                </div>
-                <button className="rounded-full border border-slate-800 bg-slate-900/80 p-3"><ChevronRight /></button>
-              </div>
-            </section>
-          </div>
-
-          {/* Perks footer */}
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {[
-              { title: '100% Authentic Products', desc: 'Direct from official brands' },
-              { title: 'Best Price Guarantee', desc: 'We match any price' },
-              { title: 'Secure Checkout', desc: '100% secure payment' },
-              { title: 'Free Worldwide Shipping', desc: `On orders over ${currency}99` },
-            ].map((p) => (
-              <div key={p.title} className="rounded-2xl border border-slate-800 bg-slate-950/80 p-6 text-center">
-                <p className="font-semibold text-white">{p.title}</p>
-                <p className="mt-2 text-sm text-slate-400">{p.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <SideDrawer open={filtersOpen} onClose={() => setFiltersOpen(false)}>
-        {/* mobile filters content */}
-        <div className="space-y-4">
-          <div className="relative block">
-            <span className="absolute inset-y-0 left-3 flex items-center text-slate-500"><Search size={16} /></span>
-            <input placeholder="Search brands..." className="w-full rounded-lg border border-slate-800 bg-slate-900/80 py-3 pl-10 pr-4 text-sm text-slate-200 outline-none" />
+      <section className="mx-auto max-w-[1400px] px-6 py-12 sm:py-16">
+        <div className="mb-8 flex items-center justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">Design categories</p>
+            <h2 className="mt-2 text-3xl font-bold text-slate-900">Creative solutions</h2>
           </div>
-          <div className="space-y-2">
-            <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Popular Brands</p>
-            {brandEntries.slice(0, 12).map(([brand, items]) => (
-              <label key={brand} className="flex items-center gap-3 rounded-3xl border border-slate-800 bg-slate-900/80 px-4 py-3 text-sm text-slate-300">
-                <input type="checkbox" className="h-4 w-4 accent-violet-500" />
-                <span className="flex-1">{brand}</span>
-                <span className="text-slate-500">{items.length}</span>
-              </label>
-            ))}
+          <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600 md:flex">
+            <Search size={16} className="text-amber-500" /> Search designs
           </div>
         </div>
-      </SideDrawer>
+
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {brandCards.map((item) => (
+            <article key={item.name} className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_20px_40px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_rgba(15,23,42,0.12)]">
+              <div className="relative h-60 overflow-hidden bg-slate-200">
+                <div className={`absolute inset-0 bg-gradient-to-br ${item.accent}`} />
+                <img src={item.image} alt={item.name} className="h-full w-full object-cover mix-blend-multiply opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent" />
+              </div>
+              <div className="p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-600">{item.name}</p>
+                <h3 className="mt-3 text-xl font-semibold text-slate-900">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{item.description}</p>
+                <Link href="/products" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 transition group-hover:text-amber-600">
+                  See options <ArrowRight size={16} />
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-t border-slate-200 bg-white/80">
+        <div className="mx-auto grid max-w-[1400px] gap-6 px-6 py-12 md:grid-cols-3">
+          <div className="rounded-[24px] border border-slate-200 bg-[#f5f5f2] p-6">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
+              <Palette size={20} />
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900">Brand-first thinking</h3>
+            <p className="mt-3 text-sm leading-6 text-slate-600">We craft visual identities that feel premium and consistent across every channel.</p>
+          </div>
+
+          <div className="rounded-[24px] border border-slate-200 bg-[#f5f5f2] p-6">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
+              <TrendingUp size={20} />
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900">Performance-driven design</h3>
+            <p className="mt-3 text-sm leading-6 text-slate-600">Our materials are optimized for conversion, awareness and strong business presentation.</p>
+          </div>
+
+          <div className="rounded-[24px] border border-slate-200 bg-[#f5f5f2] p-6">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
+              <Tag size={20} />
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900">Flexible production</h3>
+            <p className="mt-3 text-sm leading-6 text-slate-600">Whether it is digital, print, packaging or signage, we tailor the right format for your audience.</p>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }
+
+

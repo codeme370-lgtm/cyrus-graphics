@@ -37,6 +37,8 @@ import {
   Mail,
   FileText,
   Edit3,
+  Store,
+  Percent,
 } from 'lucide-react'
 import logo from '@/app/logo.png'
 
@@ -50,10 +52,13 @@ const Drawer = ({ open, onClose, isSidebarMode = false, isSidebarOpen = true, on
 
   const navItems = [
     { name: 'Home', href: '/', icon: Home },
+    { name: 'Products', href: '/products', icon: ShoppingBag },
     { name: 'Services', href: '/services', icon: Sparkles },
     { name: 'Portfolio', href: '/portfolio', icon: Image },
+    { name: 'Pricing', href: '/pricing', icon: Tag },
     { name: 'Blog', href: '/blog', icon: FileText },
-    { name: 'Shop', href: '/shop', icon: ShoppingBag },
+    { name: 'Reviews', href: '/testimonials', icon: Star },
+    { name: 'FAQ', href: '/faq', icon: Headphones },
     { name: 'Brands', href: '/brands', icon: Tag },
     { name: 'Deals & Offers', href: '/shop?sort=deals', icon: Sparkles, badge: 'New' },
     { name: 'Video Guides', href: '/video-guides', icon: Video },
@@ -64,6 +69,8 @@ const Drawer = ({ open, onClose, isSidebarMode = false, isSidebarOpen = true, on
     { name: 'Orders', href: '/orders', icon: Package },
     { name: 'Track Order', href: '/track-order', icon: Truck },
     { name: 'Returns & Refunds', href: '/returns-refunds', icon: RotateCcw },
+    { name: 'About Us', href: '/about', icon: User },
+    { name: 'Contact Us', href: '/contact', icon: MapPin },
     { name: 'My Account', href: '/profile', icon: User },
   ]
 
@@ -85,10 +92,20 @@ const Drawer = ({ open, onClose, isSidebarMode = false, isSidebarOpen = true, on
       ]
     },
     {
+      title: 'PRODUCTION & OPERATIONS',
+      links: [
+        { name: 'Printing Jobs', href: '/admin/printing-jobs', icon: Box },
+        { name: 'Deliveries', href: '/admin/deliveries', icon: Truck },
+        { name: 'Pricing', href: '/admin/pricing', icon: Sparkles },
+      ]
+    },
+    {
       title: 'ORDERS & CUSTOMERS',
       links: [
         { name: 'Orders', href: '/admin/orders', icon: ShoppingBag },
         { name: 'Customers', href: '/admin/customers', icon: Users },
+        { name: 'Quotes', href: '/admin/quotes', icon: Sparkles },
+        { name: 'Payments', href: '/admin/payments', icon: CreditCard },
         { name: 'Returns & Refunds', href: '/admin/returns', icon: RotateCcw },
       ]
     },
@@ -100,14 +117,17 @@ const Drawer = ({ open, onClose, isSidebarMode = false, isSidebarOpen = true, on
         { name: 'Newsletter', href: '/admin/newsletter', icon: Mail },
         { name: 'Pages', href: '/admin/pages', icon: FileText },
         { name: 'Blog Posts', href: '/admin/blog-posts', icon: Edit3 },
+        { name: 'Portfolio', href: '/admin/portfolio', icon: Image },
       ]
     },
     {
       title: 'SYSTEM & SETTINGS',
       links: [
-        { name: 'Users & Roles', href: '/admin/users', icon: User },
+        { name: 'Stores', href: '/admin/stores', icon: Store },
+        { name: 'Staff', href: '/admin/staff', icon: User },
         { name: 'Payment Methods', href: '/admin/payment-methods', icon: CreditCard },
         { name: 'Shipping Methods', href: '/admin/shipping-methods', icon: Truck },
+        { name: 'Taxes', href: '/admin/taxes', icon: Percent },
         { name: 'Settings', href: '/admin/settings', icon: Settings },
       ]
     },
