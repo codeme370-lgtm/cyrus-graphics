@@ -6,42 +6,110 @@ datasource db {
   provider = "postgresql"
 }
 
+enum OrderStatus {
+  ORDER_PLACED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+}
 
+enum PaymentMethod {
+  COD
+  PAYSTACK
+}
+
+enum PaymentStatus {
+  PENDING
+  AUTHORIZED
+  FAILED
+}
 
 model User {
-  id                  String               @id @default(cuid())
-  name                String
-  email               String               @unique
-  image               String               @default("")
-  password            String
-  role                String               @default("customer")
-  authType            String               @default("local")
-  cart                Json                 @default("{}")
-  Address             Address[]
-  addressChangeAlerts AddressChangeAlert[]
-  buyerOrders         Order[]              @relation("BuyerRelation")
-  deliveryReports     DeliveryReport[]
-  ratings             Rating[]
-  sellerReviews       SellerReview[]
-  store               Store?
+  id                      String                 @id @default(cuid())
+  name                    String
+  email                   String                 @unique
+  image                   String                 @default("")
+  password                String
+  role                    String                 @default("customer")
+  authType                String                 @default("local")
+  cart                    Json                   @default("{}")
+  createdAt               DateTime               @default(now())
+  updatedAt               DateTime               @updatedAt
+  Address                 Address[]
+  addressChangeAlerts     AddressChangeAlert[]
+  deliveryReports         DeliveryReport[]
+  buyerOrders             Order[]                @relation("BuyerRelation")
+  ratings                 Rating[]
+  sellerReviews           SellerReview[]
+  store                   Store?
+  productReviews          ProductReview[]
+  blogPosts               BlogPost[]
+  newsletterSubscriptions NewsletterSubscriber[]
+}
+
+model Brand {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  image       String?
+  status      String    @default("ACTIVE")
+  isFeatured  Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  description String?
+  image       String?
+  parentId    String?
+  status      String     @default("ACTIVE")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  parent      Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children    Category[] @relation("CategoryTree")
+  products    Product[]
+  blogPosts   BlogPost[]
 }
 
 model Product {
-  id          String      @id @default(cuid())
-  name        String
-  description String
-  mrp         Float
-  price       Float
-  images      String[]
-  category    String
-  inStock     Boolean     @default(true)
-  quantity    Int         @default(0)
-  storeId     String
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  orderItems  OrderItem[]
-  store       Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
-  rating      Rating[]
+  id             String          @id @default(cuid())
+  name           String
+  description    String
+  mrp            Float
+  price          Float
+  images         String[]
+  category       String
+  categoryId     String?
+  brandId        String?
+  inStock        Boolean         @default(true)
+  quantity       Int             @default(0)
+  storeId        String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  orderItems     OrderItem[]
+  store          Store           @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  rating         Rating[]
+  productReviews ProductReview[]
+  categoryRef    Category?       @relation(fields: [categoryId], references: [id])
+  brand          Brand?          @relation(fields: [brandId], references: [id])
+}
+
+model ProductReview {
+  id        String   @id @default(cuid())
+  rating    Int
+  review    String
+  productId String
+  userId    String
+  status    String   @default("PENDING")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Order {
@@ -59,16 +127,16 @@ model Order {
   updatedAt           DateTime             @updatedAt
   isCouponUsed        Boolean              @default(false)
   coupon              Json                 @default("{}")
+  deliveryDeadline    DateTime?
+  deliveryWindowHours Int?
+  deliveryConfirmed   Boolean              @default(false)
   addressChangeAlerts AddressChangeAlert[]
+  deliveryReports     DeliveryReport[]
   address             Address              @relation(fields: [addressId], references: [id])
   store               Store                @relation(fields: [storeId], references: [id])
   user                User                 @relation("BuyerRelation", fields: [userId], references: [id])
   orderItems          OrderItem[]
   ratings             Rating[]
-  deliveryReports     DeliveryReport[]
-  deliveryDeadline    DateTime?
-  deliveryWindowHours Int?
-  deliveryConfirmed   Boolean              @default(false)
 }
 
 model OrderItem {
@@ -143,13 +211,13 @@ model Store {
   totalFollowers      Int                  @default(0)
   totalReviews        Int                  @default(0)
   addressChangeAlerts AddressChangeAlert[]
+  deliveryReports     DeliveryReport[]
   Order               Order[]
   Product             Product[]
   searchOptimization  SearchOptimization?
   sellerReviews       SellerReview[]
   user                User                 @relation(fields: [userId], references: [id])
   followers           StoreFollower[]
-  deliveryReports     DeliveryReport[]
 }
 
 model DeliveryReport {
@@ -159,7 +227,6 @@ model DeliveryReport {
   userId    String
   status    String
   createdAt DateTime @default(now())
-
   order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
   store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -201,11 +268,134 @@ model SearchOptimization {
   store          Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
 }
 
-model Category {
+model Service {
+  id               String   @id @default(cuid())
+  name             String   @unique
+  slug             String   @unique
+  shortDescription String?
+  description      String?
+  image            String?
+  price            Float?
+  status           String   @default("ACTIVE")
+  isFeatured       Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Banner {
+  id        String    @id @default(cuid())
+  title     String
+  subtitle  String?
+  image     String
+  link      String?
+  placement String    @default("HOME")
+  status    String    @default("DRAFT")
+  startsAt  DateTime?
+  endsAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model PortfolioProject {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  category    String
+  clientName  String?
+  description String?
+  image       String?
+  status      String   @default("DRAFT")
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BlogCategory {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String     @unique
+  createdAt DateTime   @default(now())
+  posts     BlogPost[]
+}
+
+model BlogPost {
+  id             String        @id @default(cuid())
+  title          String
+  slug           String        @unique
+  excerpt        String?
+  content        String
+  coverImage     String?
+  authorId       String?
+  categoryId     String?
+  status         String        @default("DRAFT")
+  featured       Boolean       @default(false)
+  views          Int           @default(0)
+  publishedAt    DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  author         User?         @relation(fields: [authorId], references: [id])
+  category       Category?     @relation(fields: [categoryId], references: [id])
+  blogCategory   BlogCategory? @relation(fields: [blogCategoryId], references: [id])
+  blogCategoryId String?
+}
+
+model Page {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  body            String?
+  metaTitle       String?
+  metaDescription String?
+  status          String   @default("DRAFT")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  status    String   @default("SUBSCRIBED")
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SystemSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PaymentMethodConfig {
   id        String   @id @default(cuid())
   name      String   @unique
-  slug      String   @unique
+  type      String   @default("card")
+  status    String   @default("ACTIVE")
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ShippingMethodConfig {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  price     Float    @default(0)
+  status    String   @default("ACTIVE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TaxSetting {
+  id        String   @id @default(cuid())
+  country   String   @default("NG")
+  rate      Float    @default(7.5)
+  isEnabled Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model AddressChangeAlert {
@@ -220,22 +410,4 @@ model AddressChangeAlert {
   order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
   store      Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-enum OrderStatus {
-  ORDER_PLACED
-  PROCESSING
-  SHIPPED
-  DELIVERED
-}
-
-enum PaymentMethod {
-  COD
-  PAYSTACK
-}
-
-enum PaymentStatus {
-  PENDING
-  AUTHORIZED
-  FAILED
 }

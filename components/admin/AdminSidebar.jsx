@@ -28,6 +28,10 @@ import {
     Activity,
     ServerCog,
     ChevronDown,
+    BarChart3,
+    MessageSquare,
+    Printer,
+    Briefcase,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -50,9 +54,16 @@ const { user } = useAuth()
             links: [
                 { name: 'Products', href: '/admin/products', icon: Box },
                 { name: 'Categories', href: '/admin/categories', icon: Layers },
+                { name: 'Services', href: '/admin/services', icon: Briefcase },
                 { name: 'Brands', href: '/admin/brands', icon: Tag },
                 { name: 'Attributes', href: '/admin/attributes', icon: SlidersHorizontal },
                 { name: 'Reviews', href: '/admin/reviews', icon: Star },
+            ]
+        },
+        {
+            title: 'PRODUCTION & OPERATIONS',
+            links: [
+                { name: 'Printing Jobs', href: '/admin/printing-jobs', icon: Printer },
             ]
         },
         {
@@ -60,6 +71,8 @@ const { user } = useAuth()
             links: [
                 { name: 'Orders', href: '/admin/orders', icon: ShoppingBag },
                 { name: 'Customers', href: '/admin/customers', icon: Users },
+                { name: 'Quotes', href: '/admin/quotes', icon: MessageSquare },
+                { name: 'Payments', href: '/admin/payments', icon: CreditCard },
                 { name: 'Returns & Refunds', href: '/admin/returns', icon: RefreshCcw },
             ]
         },
@@ -71,6 +84,13 @@ const { user } = useAuth()
                 { name: 'Newsletter', href: '/admin/newsletter', icon: Mail },
                 { name: 'Pages', href: '/admin/pages', icon: FileText },
                 { name: 'Blog Posts', href: '/admin/blog-posts', icon: Edit3 },
+                { name: 'Portfolio', href: '/admin/portfolio', icon: ImageIcon },
+            ]
+        },
+        {
+            title: 'REPORTS & ANALYTICS',
+            links: [
+                { name: 'Reports', href: '/admin/reports', icon: BarChart3 },
             ]
         },
         {

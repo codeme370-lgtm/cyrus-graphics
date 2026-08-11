@@ -1,136 +1,154 @@
 import Link from "next/link";
-import { Award, Users, Sparkles, ShieldCheck, Star } from "lucide-react";
+import Image from "next/image";
+import { Lightbulb, Award, Shield, Zap, Users } from "lucide-react";
+import { assets } from "@/assets/assets";
 
 export const metadata = {
-    title: "About Cyrus Graphics - Design & Print Excellence",
-    description: "Cyrus Graphics delivers premium print, packaging, branding, and design services for businesses.",
-    keywords: ["Cyrus Graphics", "about", "print services", "branding", "packaging"],
+    title: "About Us - Cyrus Graphics",
+    description: "Learn about Cyrus Graphics, a creative design and printing company dedicated to delivering premium print solutions and branding services.",
+    keywords: ["about us", "Cyrus Graphics", "design company", "print services"],
 };
 
-const values = [
-    { title: 'Design Excellence', desc: "We craft polished print and brand experiences that make an impression.", icon: Sparkles },
-    { title: 'Quality Materials', desc: "Premium papers, finishes and packaging built to last.", icon: Award },
-    { title: 'Fast Turnaround', desc: "Quick production with reliable delivery for every order.", icon: ShieldCheck },
-    { title: 'Clear Communication', desc: "Transparent quotes and updates through every step.", icon: Users },
-    { title: 'Customer Focus', desc: "Your brand goals guide every creative and production decision.", icon: Star },
-    { title: 'Creative Support', desc: "Design guidance, file prep, and proofing from our expert team.", icon: Sparkles },
+const coreValues = [
+    { title: 'Creativity', icon: Lightbulb },
+    { title: 'Quality', icon: Award },
+    { title: 'Integrity', icon: Shield },
+    { title: 'Innovation', icon: Zap },
+    { title: 'Customer Focus', icon: Users },
 ];
 
 const team = [
-    { name: 'Evelyn Clark', role: 'Founder & Creative Director', image: '/images/team/alex.jpg' },
-    { name: 'Marcus Reed', role: 'Production Manager', image: '/images/team/sophia.jpg' },
-    { name: 'Amina Yusuf', role: 'Brand Strategist', image: '/images/team/daniel.jpg' },
-    { name: 'Rita Mensah', role: 'Customer Success Lead', image: '/images/team/emily.jpg' },
-    { name: 'Samuel Ofori', role: 'Print Specialist', image: '/images/team/michael.jpg' },
-    { name: 'Nadia Williams', role: 'Account Manager', image: '/images/team/olivia.jpg' },
+    { name: 'Richard N.', role: 'Creative Director', image: assets.profile_pic1 },
+    { name: 'Melissa A.', role: 'Production Lead', image: assets.profile_pic2 },
+    { name: 'Jason T.', role: 'Design Specialist', image: assets.profile_pic3 },
+    { name: 'Emelia A.', role: 'Account Manager', image: assets.profile_pic1 },
 ];
 
 export default function AboutPage() {
     return (
-        <main className="min-h-screen bg-[#050712] text-slate-100">
+        <main className="min-h-screen bg-[#06070e] text-slate-100">
+            {/* Hero Section with Banner */}
             <section className="relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.18),_transparent_24%),radial-gradient(circle_at_top_right,_rgba(14,165,233,0.16),_transparent_30%),linear-gradient(180deg,rgba(7,9,22,0.88),rgba(5,7,16,0.98))]" />
-                <div className="relative mx-auto max-w-[1400px] px-6 py-16">
-                    <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-center">
-                        <div>
-                            <p className="text-sm uppercase tracking-[0.28em] text-amber-400">ABOUT CYRUS GRAPHICS</p>
-                            <h1 className="mt-4 text-5xl font-semibold text-white sm:text-6xl">Designing Ideas. <span className="text-amber-400">Printing Excellence.</span></h1>
-                            <p className="mt-6 max-w-2xl text-slate-300 leading-relaxed">Cyrus Graphics is a full-service print and branding studio. We combine creative design, premium production, and fast service to help businesses present their best.</p>
+                <div className="absolute inset-0">
+                    <img
+                        src={assets.ba4}
+                        alt="Cyrus Graphics storefront"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60"></div>
+                </div>
 
-                            <div className="mt-8 flex gap-6 flex-wrap">
-                                <div className="rounded-2xl bg-[#0b0f1a]/60 p-5">
-                                    <div className="text-3xl font-bold text-white">2,500+</div>
-                                    <p className="text-sm text-slate-400 mt-1">Projects Delivered</p>
-                                </div>
-                                <div className="rounded-2xl bg-[#0b0f1a]/60 p-5">
-                                    <div className="text-3xl font-bold text-white">1,200+</div>
-                                    <p className="text-sm text-slate-400 mt-1">Customers Served</p>
-                                </div>
-                                <div className="rounded-2xl bg-[#0b0f1a]/60 p-5">
-                                    <div className="text-3xl font-bold text-white">10+</div>
-                                    <p className="text-sm text-slate-400 mt-1">Years of Experience</p>
-                                </div>
-                            </div>
-
-                            <div className="mt-8 flex flex-wrap gap-4">
-                                <Link href="/services" className="inline-flex items-center justify-center rounded-full bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-400">Our Services</Link>
-                                <Link href="/request-quote" className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Request a Quote</Link>
-                            </div>
-                        </div>
-
-                        <div className="rounded-[2.5rem] border border-white/10 bg-slate-950/80 p-8 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)] backdrop-blur-xl">
-                            <div className="relative rounded-[2rem] bg-[#06101b] p-8">
-                                <div className="inline-flex rounded-full bg-amber-500/15 px-4 py-2 text-xs uppercase tracking-[0.32em] text-amber-300">Studio Expertise</div>
-                                <h2 className="mt-6 text-3xl font-semibold text-white">Printing, packaging, branding and creative support in one place.</h2>
-                                <p className="mt-4 text-slate-400 leading-7">From business cards and brochures to retail packaging and event signage, we deliver premium printed materials that support your brand story.</p>
-                                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                                    <div className="rounded-[1.8rem] border border-white/10 bg-[#07111f] p-5">
-                                        <p className="text-sm uppercase tracking-[0.28em] text-slate-500">Fast Proofs</p>
-                                        <p className="mt-3 text-white">Quick design review and approval so production starts sooner.</p>
-                                    </div>
-                                    <div className="rounded-[1.8rem] border border-white/10 bg-[#07111f] p-5">
-                                        <p className="text-sm uppercase tracking-[0.28em] text-slate-500">Premium Finish</p>
-                                        <p className="mt-3 text-white">Choice of textures, coatings, and custom packaging options.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-20 sm:py-32 lg:py-40">
+                    <div className="space-y-4 sm:space-y-6">
+                        <nav className="text-xs sm:text-sm text-slate-300 flex items-center gap-2">
+                            <Link href="/" className="hover:text-white transition">Home</Link>
+                            <span>/</span>
+                            <span className="text-amber-400">About Us</span>
+                        </nav>
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white">About Us</h1>
                     </div>
                 </div>
             </section>
 
-            <section className="mx-auto max-w-[1400px] px-6 py-12">
-                <h2 className="text-3xl font-semibold text-white mb-8">Our Values</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {values.map((v, i) => {
-                        const Icon = v.icon;
+            {/* Who We Are Section */}
+            <section className="mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+                    <div>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6">Who We Are</h2>
+                        <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed mb-3 sm:mb-4">
+                            Cyrus Graphics is a creative design and printing company dedicated to transforming brands through innovative design and premium print solutions.
+                        </p>
+                        <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed">
+                            With a passion for creativity, we combine cutting-edge design with top-quality printing to deliver outstanding results. Our team is committed to bringing your vision to life with precision, creativity, technology and unparalleled materials to exceed your expectations.
+                        </p>
+                    </div>
+                    <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-lg">
+                        <img
+                            src={assets.ba1}
+                            alt="Team working on design and printing"
+                            className="w-full h-64 sm:h-80 object-cover"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            {/* Our Mission Section */}
+            <section className="mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-16">
+                <div className="bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-6 sm:p-10">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Our Mission</h3>
+                    <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        To provide high-quality graphic design and printing services that help businesses strengthen their brand presence and communicate their message effectively. We believe in delivering exceptional results that inspire, engage, and drive success for our clients.
+                    </p>
+                </div>
+            </section>
+
+            {/* Our Vision Section */}
+            <section className="mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-16">
+                <div className="bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-6 sm:p-10">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Our Vision</h3>
+                    <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        To be the leading creative design and printing company in Africa, known for our innovation, quality, and customer-centric approach. We aspire to empower businesses with creative solutions that drive growth and create lasting impact in their industries.
+                    </p>
+                </div>
+            </section>
+
+            {/* Core Values Section */}
+            <section className="mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 sm:mb-12 text-center">Core Values</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
+                    {coreValues.map((value, i) => {
+                        const Icon = value.icon;
                         return (
-                            <div key={i} className="rounded-2xl border border-white/6 bg-[#071021] p-6">
-                                <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-amber-500/10 text-amber-300 mb-4">
-                                    <Icon />
+                            <div key={i} className="flex flex-col items-center text-center">
+                                <div className="bg-amber-500/15 p-4 sm:p-6 rounded-full mb-3 sm:mb-4">
+                                    <Icon size={24} className="text-amber-400 sm:size-32" />
                                 </div>
-                                <h4 className="font-semibold mb-2 text-white">{v.title}</h4>
-                                <p className="text-sm text-slate-400">{v.desc}</p>
+                                <h4 className="text-white font-semibold text-sm sm:text-base">{value.title}</h4>
                             </div>
-                        )
+                        );
                     })}
                 </div>
             </section>
 
-            <section className="mx-auto max-w-[1400px] px-6 py-12">
-                <h2 className="text-3xl font-semibold text-white mb-8">Meet Our Team</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    {team.map((m, i) => (
-                        <div key={i} className="rounded-2xl bg-[#071021] p-6 text-center">
-                            <div className="mx-auto h-28 w-28 rounded-full bg-slate-800 overflow-hidden flex items-center justify-center mb-4">
-                                <img src={m.image} alt={m.name} className="object-cover h-full w-full" />
+            {/* Meet Our Team Section */}
+            <section className="mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 sm:mb-12 text-center">Meet Our Team</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+                    {team.map((member, i) => (
+                        <div key={i} className="text-center">
+                            <div className="mb-3 sm:mb-4 rounded-lg sm:rounded-xl overflow-hidden bg-slate-800 h-48 sm:h-64 flex items-center justify-center">
+                                <img
+                                    src={member.image}
+                                    alt={member.name}
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
-                            <div className="text-sm font-semibold text-white">{m.name}</div>
-                            <div className="text-xs text-slate-400">{m.role}</div>
+                            <h4 className="text-white font-semibold text-sm sm:text-lg">{member.name}</h4>
+                            <p className="text-slate-400 text-xs sm:text-sm mt-1">{member.role}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
-            <section className="mt-8">
-                <div className="bg-gradient-to-r from-amber-500/15 to-slate-900 py-8">
-                    <div className="mx-auto max-w-[1400px] px-6 text-white flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div className="flex gap-8 items-center flex-wrap">
-                            <div className="text-center">
-                                <div className="text-2xl font-bold">10+</div>
-                                <div className="text-sm opacity-90">Years of Experience</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl font-bold">2,500+</div>
-                                <div className="text-sm opacity-90">Projects Delivered</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl font-bold">500+</div>
-                                <div className="text-sm opacity-90">Happy Clients</div>
-                            </div>
+            {/* Stats Section */}
+            <section className="mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20">
+                <div className="bg-slate-900 rounded-xl sm:rounded-2xl p-6 sm:p-12 md:p-16">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+                        <div className="text-center">
+                            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-1 sm:mb-2">850+</div>
+                            <p className="text-slate-300 text-xs sm:text-sm">Projects Delivered</p>
                         </div>
-                        <div>
-                            <Link href="/request-quote" className="inline-flex items-center gap-2 rounded-full bg-slate-950/90 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-900">Request a Quote</Link>
+                        <div className="text-center">
+                            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-1 sm:mb-2">600+</div>
+                            <p className="text-slate-300 text-xs sm:text-sm">Happy Clients</p>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-1 sm:mb-2">10+</div>
+                            <p className="text-slate-300 text-xs sm:text-sm">Years Experience</p>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-1 sm:mb-2">25+</div>
+                            <p className="text-slate-300 text-xs sm:text-sm">Team Members</p>
                         </div>
                     </div>
                 </div>

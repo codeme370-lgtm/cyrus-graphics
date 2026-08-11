@@ -24,18 +24,28 @@ export async function GET(request) {
         const users=await prisma.user.count()
 
         //get all orders include only createdAt and calculate  to revenue
-
         const allOrders= await prisma.order.findMany({
             select:{
                 createdAt:true,
-                total:true}
+                total:true,
+                status:true
+            }
         })
 
         let totalRevenue=0
+        let pendingOrders = 0
+        let shippedOrders = 0
+        let deliveredOrders = 0
+
         allOrders.forEach(order=>{
-            totalRevenue +=order.total
+            totalRevenue += order.total
+            if(order.status === 'pending') pendingOrders++
+            else if(order.status === 'shipped') shippedOrders++
+            else if(order.status === 'delivered') deliveredOrders++
         })
+        
         const revenue= totalRevenue.toFixed(2)
+        
         //total number of products on the app
         const products= await prisma.product.count()
 
@@ -45,7 +55,10 @@ export async function GET(request) {
         stores,
         products,
         revenue,
-        allOrders
+        allOrders,
+        pendingOrders,
+        shippedOrders,
+        deliveredOrders
     }
     //lets return a response
         return NextResponse.json({dashboardData}, {status:200}) 

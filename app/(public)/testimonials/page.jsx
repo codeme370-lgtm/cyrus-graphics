@@ -1,25 +1,15 @@
-import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import ClientReviewsSection from "@/components/ClientReviewsSection";
 
 export const metadata = {
-  title: "Testimonials - Cyrus Graphics",
-  description: "See what customers are saying about their print and branding experience with Cyrus Graphics.",
-  keywords: ["testimonials", "customer reviews", "Cyrus Graphics"],
+  title: "Client Reviews - Cyrus Graphics",
+  description: "Read what our clients say about their design and print experience with Cyrus Graphics. See testimonials from satisfied brands.",
+  keywords: ["client reviews", "testimonials", "graphic design", "printing", "Cyrus Graphics"],
 };
 
-export default function TestimonialsPage() {
+export default function ClientReviewsPage() {
   return (
-    <main className="min-h-screen bg-[#050710] text-slate-100">
-      <section className="py-16">
-        <div className="mx-auto max-w-[1100px] px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.32em] text-orange-400">Our Clients</p>
-          <h1 className="mt-4 text-5xl font-semibold text-white sm:text-6xl">Trusted by brands that want premium print and design.</h1>
-          <p className="mt-6 text-slate-300 leading-8">Read how our team delivered standout print experiences and faster production for businesses across industries.</p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1100px] px-6 pb-20">
-        <TestimonialsCarousel />
-      </section>
+    <main className="min-h-screen bg-[#06070e] text-slate-100">
+      <ClientReviewsSection />
     </main>
   );
 }
